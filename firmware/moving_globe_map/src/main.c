@@ -38,6 +38,7 @@ int main(void) {
 	MAIN_Init();
 
 	while (1) {
+		PWM_SetServo(1,0);
 	}
 
 }
