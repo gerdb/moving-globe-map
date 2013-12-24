@@ -36,28 +36,40 @@ void PWM_Init(void) {
 	PORTB &= ~_BV(PB2);
 
 	// Set at BOTTOM, Clear at match
-	TCCR1A = _BV(COM1A1) | _BV(COM1A0) | _BV(COM1B1) | _BV(WGM11);
+	TCCR1A = _BV(COM1A1) | _BV(COM1B1) | _BV(WGM11);
 
 	// Fast PWM, Top of ICR1, prescaler: 1:1
 	TCCR1B = _BV(WGM13) | _BV(WGM12) | _BV(CS10);
 
-	// Set period time to 62,5kHz
-	ICR1 = 00000;
+	// Set period time to 4ms
+	ICR1 = 64000;
 
-	// Set PWM of boost to 0%
-	OCR1A = 0x0080;
+	// Set PWM of Servo1 to 1500µs
+	OCR1A = 1500*16;
 
-	// Set PWM of buck to 0%
-	OCR1B = 0x0000;
+	// Set PWM of Servo1 to 1500µs
+	OCR1B = 1500*16;
 }
 
 /*
  * Set the PWM of the servo
  *
- * \param val Servo value from -1024 ... +1024
+ * \param servo Servo number 0 or 1
+ * \param val Servo value from -8000 ... +8000
  */
 void PWM_SetServo(unsigned char servo, signed int val) {
 
-	OCR1B = val;
+	//Limit the servo values
+	if (val < -12000)
+		val = -12000;
+	if (val > 12000)
+		val = 12000;
+
+	if (servo == 0) {
+		OCR1A = 1500*16 + val;
+	}
+	if (servo == 1) {
+		OCR1B = 1500*16 + val;
+	}
 }
 
