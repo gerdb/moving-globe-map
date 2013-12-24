@@ -1,9 +1,9 @@
 /*
  *  Project:      moving globe map
- *  File:         main.c
+ *  File:         uart.h
  *  Author:       gerd bartelt - www.sebulli.com
  *
- *  Description:  main file
+ *  Description:  header file for uart.c
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,29 +19,12 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+#ifndef UART_H_
+#define UART_H_
 
-#include <avr/io.h>
-#include "project.h"
-#include "pwm.h"
-#include "uart.h"
+//Function prototypes
+void UART_Init(void);
+void UART_Tx(char data);
+char UART_Rx(void);
 
-void MAIN_Init(void) {
-
-}
-
-/*
- * Main function
- */
-int main(void) {
-
-	//Initialize all modules
-	PWM_Init();
-	UART_Init();
-	MAIN_Init();
-
-	while (1) {
-		PWM_SetServo(1,0);
-		UART_Tx('x');
-	}
-
-}
+#endif /* UART_H_ */
