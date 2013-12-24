@@ -1,9 +1,9 @@
 /*
  *  Project:      moving globe map
- *  File:         main.c
+ *  File:         gps.h
  *  Author:       gerd bartelt - www.sebulli.com
  *
- *  Description:  main file
+ *  Description:  header file for gps.c
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,31 +19,11 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+#ifndef GPS_H_
+#define GPS_H_
 
-#include <avr/io.h>
-#include "project.h"
-#include "pwm.h"
-#include "uart.h"
+//Function prototypes
+void GPS_Init(void);
+void GPS_Task(void);
 
-void MAIN_Init(void) {
-
-}
-
-/*
- * Main function
- */
-int main(void) {
-
-	//Initialize all modules
-	PWM_Init();
-	UART_Init();
-	MAIN_Init();
-	GPS_Init();
-
-	while (1) {
-		GPS_Task();
-		PWM_SetServo(1,0);
-		UART_Tx('x');
-	}
-
-}
+#endif /* GPS_H_ */
