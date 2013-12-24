@@ -1,9 +1,9 @@
 /*
  *  Project:      moving globe map
- *  File:         main.c
+ *  File:         gps.c
  *  Author:       gerd bartelt - www.sebulli.com
  *
- *  Description:  main file
+ *  Description:  Decodes the GPS position
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,28 +22,18 @@
 
 #include <avr/io.h>
 #include "project.h"
-#include "pwm.h"
-#include "uart.h"
+#include "gps.h"
 
-void MAIN_Init(void) {
+/*
+ * Initialize the GPS module
+ */
+void GPS_Init(void){
 
 }
 
 /*
- * Main function
+ * Decode the GPS data
  */
-int main(void) {
-
-	//Initialize all modules
-	PWM_Init();
-	UART_Init();
-	MAIN_Init();
-	GPS_Init();
-
-	while (1) {
-		GPS_Task();
-		PWM_SetServo(1,0);
-		UART_Tx('x');
-	}
+void GPS_Task(void) {
 
 }
