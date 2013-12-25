@@ -36,8 +36,8 @@ const unsigned char pattern[] = "$GPGGA,??????.???,????.????,N,?????.????,E,?,";
 // global variables
 unsigned char send = 0;
 unsigned char dec;
-float north = 0.0;
-float east = 0.0;
+double north = 0.0;
+double east = 0.0;
 unsigned char quality = 0;
 
 unsigned int deg,min,post;
