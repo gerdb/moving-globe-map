@@ -1,9 +1,9 @@
 /*
  *  Project:      moving globe map
- *  File:         main.c
+ *  File:         tranform.c
  *  Author:       gerd bartelt - www.sebulli.com
  *
- *  Description:  main file
+ *  Description:  Transforms the GPS coordinates into servo values
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,47 +21,28 @@
  */
 
 #include <avr/io.h>
-#include <stdio.h>
 #include "project.h"
-#include "pwm.h"
-#include "uart.h"
 #include "gps.h"
+#include "uart.h"
 #include "transform.h"
 
-/*
- * local variables
- */
-char mystr[60];
+// constants
+
+// global variables
+
+// local variables
 
 
 /*
- * Main Init
+ * Initialize the Module
  */
-void MAIN_Init(void) {
+void TRANSFORM_Init(void){
 
 }
 
 /*
- * Main function
+ * Do the transformation
  */
-int main(void) {
-
-	//Initialize all modules
-	PWM_Init();
-	UART_Init();
-	MAIN_Init();
-	GPS_Init();
-	TRANSFORM_Init();
-
-	while (1) {
-		GPS_Task();
-		PWM_SetServo(1,0);
-		if (send) {
-			send = 0;
-			sprintf(mystr,"\n\r%5.4f %5.4f %d %d %d %d\n\r" , north, east, deg, min, post, quality);
-			UART_puts(mystr);
-		}
-
-	}
+void TRANSFORM_Transform(void) {
 
 }

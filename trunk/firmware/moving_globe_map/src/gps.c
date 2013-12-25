@@ -36,7 +36,6 @@ const unsigned char pattern[] = "$GPGGA,??????.???,????.????,N,?????.????,E,?,";
 // global variables
 unsigned char send = 0;
 unsigned char dec;
-char pat;
 float north = 0.0;
 float east = 0.0;
 unsigned char quality = 0;
@@ -45,6 +44,7 @@ unsigned int deg,min,post;
 
 // local variables
 unsigned char spos = 0;
+char pat;
 
 /*
  * Initialize the GPS module
