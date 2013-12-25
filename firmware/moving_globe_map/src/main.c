@@ -21,10 +21,20 @@
  */
 
 #include <avr/io.h>
+#include <stdio.h>
 #include "project.h"
 #include "pwm.h"
 #include "uart.h"
 
+/*
+ * local variables
+ */
+char mystr[60];
+
+
+/*
+ * Main Init
+ */
 void MAIN_Init(void) {
 
 }
@@ -43,7 +53,10 @@ int main(void) {
 	while (1) {
 		GPS_Task();
 		PWM_SetServo(1,0);
-		UART_Tx('x');
+		sprintf(mystr,"%6.3f" , 3.123);
+
+
+		UART_puts(mystr);
 	}
 
 }

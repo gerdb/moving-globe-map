@@ -67,3 +67,16 @@ char UART_Rx(void)
     return UDR0;
 }
 
+/*
+ * Sends a string
+ *
+ * \param s the string to send
+ */
+void UART_puts(char s[]) {
+	int i=0;
+
+	while (s[i]) {
+		UART_Tx(s[i]);
+		i++;
+	}
+}
