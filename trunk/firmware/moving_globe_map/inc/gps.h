@@ -22,6 +22,13 @@
 #ifndef GPS_H_
 #define GPS_H_
 
+//global variables
+extern unsigned char send;
+extern float north;
+extern float east;
+extern unsigned int deg,min,post;
+extern unsigned char quality;
+
 //Function prototypes
 void GPS_Init(void);
 void GPS_Task(void);
