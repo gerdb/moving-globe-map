@@ -1,9 +1,9 @@
 /*
  *  Project:      moving globe map
- *  File:         main.c
+ *  File:         tranform.h
  *  Author:       gerd bartelt - www.sebulli.com
  *
- *  Description:  main file
+ *  Description:  header file for tranform.c
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,49 +19,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+#ifndef TRANSFORM_H_
+#define TRANSFORM_H_
 
-#include <avr/io.h>
-#include <stdio.h>
-#include "project.h"
-#include "pwm.h"
-#include "uart.h"
-#include "gps.h"
-#include "transform.h"
-
-/*
- * local variables
- */
-char mystr[60];
+//global variables
 
 
-/*
- * Main Init
- */
-void MAIN_Init(void) {
+//Function prototypes
+void TRANSFORM_Init(void);
+void TRANSFORM_Transform(void);
 
-}
-
-/*
- * Main function
- */
-int main(void) {
-
-	//Initialize all modules
-	PWM_Init();
-	UART_Init();
-	MAIN_Init();
-	GPS_Init();
-	TRANSFORM_Init();
-
-	while (1) {
-		GPS_Task();
-		PWM_SetServo(1,0);
-		if (send) {
-			send = 0;
-			sprintf(mystr,"\n\r%5.4f %5.4f %d %d %d %d\n\r" , north, east, deg, min, post, quality);
-			UART_puts(mystr);
-		}
-
-	}
-
-}
+#endif /* TRANSFORM_H_ */
