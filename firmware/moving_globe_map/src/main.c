@@ -25,6 +25,7 @@
 #include "project.h"
 #include "pwm.h"
 #include "uart.h"
+#include "gps.h"
 
 /*
  * local variables
@@ -53,10 +54,12 @@ int main(void) {
 	while (1) {
 		GPS_Task();
 		PWM_SetServo(1,0);
-		sprintf(mystr,"%6.3f" , 3.123);
+		if (send) {
+			send = 0;
+			sprintf(mystr,"\n\r%5.4f %5.4f %d %d %d %d\n\r" , north, east, deg, min, post, quality);
+			UART_puts(mystr);
+		}
 
-
-		UART_puts(mystr);
 	}
 
 }
