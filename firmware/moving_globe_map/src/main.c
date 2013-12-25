@@ -22,17 +22,21 @@
 
 #include <avr/io.h>
 #include <stdio.h>
+#include <math.h>
 #include "project.h"
 #include "pwm.h"
 #include "uart.h"
 #include "gps.h"
 #include "transform.h"
 
+
+//#define DEMO
+
 /*
  * local variables
  */
 char mystr[60];
-
+unsigned long t=0;
 
 /*
  * Main Init
@@ -54,12 +58,27 @@ int main(void) {
 	TRANSFORM_Init();
 
 	while (1) {
+#ifndef DEMO
 		GPS_Task();
-		PWM_SetServo(1,0);
+		TRANSFORM_Transform();
+#else
+		t++;
+		a = 100 * sin ((double)t / 10000);
+		r = 0.3 * sin ((double)t / 7000);;
+#endif
+		// Is the position on the map ?
+		if ((r > -0.5) && (r < 0.5)) {
+
+			// Set the servos
+			PWM_SetServo(0, -a / 360.0 * 28000);
+			PWM_SetServo(1, -r * 28000);
+		}
+
+		//Debug output
 		if (send) {
 			send = 0;
-			sprintf(mystr,"\n\r%5.4f %5.4f %d %d %d %d\n\r" , north, east, deg, min, post, quality);
-			UART_puts(mystr);
+			//sprintf(mystr,"\n\r%5.4f %5.4f %d %5.4f %5.4f\n\r" , north, east, quality, a, r);
+			//UART_puts(mystr);
 		}
 
 	}

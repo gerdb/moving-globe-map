@@ -22,7 +22,9 @@
 #ifndef TRANSFORM_H_
 #define TRANSFORM_H_
 
-//global variables
+// global variables
+extern double r; // radius
+extern double a; // angle
 
 
 //Function prototypes

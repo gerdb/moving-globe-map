@@ -24,8 +24,8 @@
 
 //global variables
 extern unsigned char send;
-extern float north;
-extern float east;
+extern double north;
+extern double east;
 extern unsigned int deg,min,post;
 extern unsigned char quality;
 
