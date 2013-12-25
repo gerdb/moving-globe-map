@@ -26,5 +26,6 @@
 void UART_Init(void);
 void UART_Tx(char data);
 char UART_Rx(void);
+void UART_puts(char s[]);
 
 #endif /* UART_H_ */
